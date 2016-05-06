@@ -1,0 +1,11 @@
+- name: install redis package
+  package: name={{item}} state=present update_cache=yes
+  with_items:
+    - redis-server
+
+- name: config redis
+  copy: src=redis/redis.conf dest=/etc/redis/
+  register: redisconfig
+
+- service: name=redis-server state=restarted enabled=yes
+  when: redisconfig.changed
