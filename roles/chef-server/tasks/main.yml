@@ -16,3 +16,9 @@
   shell: chef-server-ctl org-create short_name '{{CHEF_ORGANIZATION}}' --association_user {{CHEF_USER_NAME}} --filename /root/{{CHEF_ORGANIZATION}}-validator.pem
   when: chefinstall.changed
    
+- name: install chef-manage
+  shell: chef-server-ctl install chef-manage
+  when: chefinstall.changed
+  tags:
+    - chef-manage
+
