@@ -9,4 +9,6 @@
     CHEF_EMAIL: username@mail.com
     CHEF_PASSWORD: change_password
     CHEF_ORGANIZATION: change_org
-
+  tags:
+    - packages
+    - configuration
