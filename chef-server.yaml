@@ -1,0 +1,12 @@
+- hosts: local
+  roles:
+    - chef-server
+  vars:
+    CHEF_PKG_URL: https://packages.chef.io/stable/el/6/chef-server-core-12.6.0-1.el6.x86_64.rpm
+    CHEF_USER_NAME: admin
+    CHEF_FIRST_NAME: User
+    CHEF_LAST_NAME: Name
+    CHEF_EMAIL: username@mail.com
+    CHEF_PASSWORD: change_password
+    CHEF_ORGANIZATION: change_org
+

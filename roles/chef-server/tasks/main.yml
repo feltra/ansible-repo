@@ -1,0 +1,18 @@
+- name: install chef-server from web
+  package: name={{CHEF_PKG_URL}} state=present
+  register: chefinstall
+  tags: 
+    - packages
+- name: first chef configure run
+  shell:  chef-server-ctl reconfigure
+  when: chefinstall.changed
+  tags:
+    - configuration
+- name: create chef admin user
+  shell: chef-server-ctl user-create {{CHEF_USER_NAME}} {{CHEF_FIRST_NAME}} {{CHEF_LAST_NAME}} {{CHEF_EMAIL}} '{{CHEF_PASSWORD}}'  --filename /root/chefadmin.pem
+  when: chefinstall.changed
+
+- name: create chef organization
+  shell: chef-server-ctl org-create short_name '{{CHEF_ORGANIZATION}}' --association_user {{CHEF_USER_NAME}} --filename /root/{{CHEF_ORGANIZATION}}-validator.pem
+  when: chefinstall.changed
+   
